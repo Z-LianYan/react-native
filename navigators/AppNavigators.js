@@ -24,3 +24,4 @@ const AppStackNavigator = createStackNavigator({
 });
 
 export default App = createAppContainer(AppStackNavigator)
+
