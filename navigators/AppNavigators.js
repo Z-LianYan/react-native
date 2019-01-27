@@ -1,4 +1,8 @@
 
+import React,{Component} from "react"
+import {
+    View
+} from "react-native"
 import {
     createStackNavigator,
     createAppContainer
@@ -11,6 +15,17 @@ import Page2 from "../pages/Page2"
 const AppStackNavigator = createStackNavigator({
     HomePage: {
         screen: HomePage,
+        navigationOptions: {
+            headerTitle:"HomePage",
+            headerStyle:{
+                backgroundColor:'#58bc58',
+                height:45
+            },
+            headerTitleStyle:{
+                flex:1,
+                textAlign: 'center',
+            },
+        },
     },
     Page1:{
         screen: Page1,
@@ -19,7 +34,18 @@ const AppStackNavigator = createStackNavigator({
         }
     },
     Page2:{
-        screen: Page2
+        screen: Page2,
+        navigationOptions: ({navigation}) =>({
+            headerTitle:navigation.state.params.name,
+            headerStyle:{
+                backgroundColor:'#58bc58',
+                height:45
+            },
+            headerTitleStyle:{
+                flex:1,
+                textAlign: 'center',
+            }
+        })
     }
 });
 

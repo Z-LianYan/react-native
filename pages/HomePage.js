@@ -35,7 +35,7 @@ export default class App extends Component<Props> {
           style={styles.btn}
           title='Go to Page2'
           onPress = {()=>{
-            navigation.navigate("Page2")
+            navigation.navigate('Page2',{name:'动态的Page2'})
           }}
         />
       </View>
