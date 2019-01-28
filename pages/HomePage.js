@@ -38,6 +38,14 @@ export default class App extends Component<Props> {
             navigation.navigate('Page2',{name:'动态的Page2'})
           }}
         />
+        <Text/>
+        <Button 
+          style={styles.btn}
+          title='Go to Page3'
+          onPress = {()=>{
+            navigation.navigate("Page3",{title:'Page3'})
+          }}
+        />
       </View>
     );
   }
@@ -51,6 +59,6 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   btn: {
-    marginBottom: 20,
+    marginBottom: 20
   }
 });

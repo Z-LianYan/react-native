@@ -1,7 +1,9 @@
 
 import React,{Component} from "react"
 import {
-    View
+    View,
+    Button,
+    StyleSheet,
 } from "react-native"
 import {
     createStackNavigator,
@@ -11,6 +13,7 @@ import {
 import HomePage from "../pages/HomePage"
 import Page1 from "../pages/Page1"
 import Page2 from "../pages/Page2"
+import Page3 from "../pages/Page3"
 
 const AppStackNavigator = createStackNavigator({
     HomePage: {
@@ -18,7 +21,7 @@ const AppStackNavigator = createStackNavigator({
         navigationOptions: {
             headerTitle:"HomePage",
             headerStyle:{
-                backgroundColor:'#58bc58',
+                backgroundColor:'#FFF8DC',
                 height:45
             },
             headerTitleStyle:{
@@ -38,7 +41,7 @@ const AppStackNavigator = createStackNavigator({
         navigationOptions: ({navigation}) =>({
             headerTitle:navigation.state.params.name,
             headerStyle:{
-                backgroundColor:'#58bc58',
+                backgroundColor:'#FFF8DC',
                 height:45
             },
             headerTitleStyle:{
@@ -46,8 +49,36 @@ const AppStackNavigator = createStackNavigator({
                 textAlign: 'center',
             }
         })
-    }
+    },
+    Page3:{
+        screen: Page3,
+        navigationOptions:(props) => {
+            const {navigation} = props;
+            const {state,setParams} = navigation;
+            const {params} = state;
+            return {
+                headerTitle: params? params.title:'this is Page3',
+                headerStyle:{
+                    backgroundColor:'#FFF8DC',
+                    height:45
+                },
+                headerTitleStyle:{
+                    flex:1,
+                    textAlign:'center'
+                },
+                headerRight:(
+                    <Button
+                        title = {params.mode === 'edit' ? '保存':'编辑'}
+                        onPress={()=>{
+                            setParams({
+                                mode:params.mode === 'edit'? '':'edit'
+                            })
+                        }}
+                    />
+                )
+            } 
+        }
+    },
 });
 
 export default App = createAppContainer(AppStackNavigator)
-

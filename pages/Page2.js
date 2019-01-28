@@ -18,9 +18,19 @@ export default class App extends Component<Props> {
     }
   }
   render() {
+    const {navigation} = this.props
     return (
       <View style={styles.container}>
         <Text>welcome to page2</Text>
+        <Text/>
+        <Button
+          title='go back'
+          style={styles.btn}
+          onPress =  {()=>{
+            navigation.goBack()
+            }
+          }
+        />
       </View>
     );
   }
@@ -33,4 +43,8 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center'
   },
+  btn:{
+    marginTop:50,
+    backgroundColor:'red',
+  }
 });

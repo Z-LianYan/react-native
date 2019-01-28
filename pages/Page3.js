@@ -6,7 +6,8 @@ import {
     Text, 
     View,
     Image,
-    Button
+    Button,
+    TextInput
 } from 'react-native';
 
 
@@ -19,17 +20,22 @@ export default class App extends Component<Props> {
   }
   render() {
     const {navigation} = this.props;
+    const {state,setParams} = navigation;
+    const {params} = state
+    const showText = params.dome === 'edit'? '正在编辑':'编辑完成'
     return (
       <View style={styles.container}>
-        <Text>welcome to page1</Text>
+        <Text>welcome to page3</Text>
         <Text/>
-        <Button
-          title='go back'
-          style={styles.btn}
-          onPress =  {()=>{
-            navigation.goBack()
-            }
-          }
+        <Text>{showText}</Text>
+        <Text/>
+        <TextInput
+            style={styles.input}
+            onChangeText = {(text)=>{
+                setParams({
+                    title:text
+                })
+            }}
         />
       </View>
     );
@@ -43,4 +49,10 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center'
   },
+  input:{
+      width:300,
+      height:50,
+      borderWidth:1,
+      borderColor:'#58bc58'
+  }
 });
