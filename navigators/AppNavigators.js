@@ -4,6 +4,7 @@ import {
     View,
     Button,
     StyleSheet,
+    Text,
 } from "react-native"
 import {
     createStackNavigator,
@@ -67,14 +68,21 @@ const AppStackNavigator = createStackNavigator({
                     textAlign:'center'
                 },
                 headerRight:(
-                    <Button
-                        title = {params.mode === 'edit' ? '保存':'编辑'}
+                    <Text
+                        style={{marginRight:20}}
                         onPress={()=>{
                             setParams({
                                 mode:params.mode === 'edit'? '':'edit'
                             })
                         }}
-                    />
+                    >{params.mode === 'edit' ? '保存':'编辑'}</Text>
+                ),
+                headerLeft:(
+                    <Text 
+                    style={{marginLeft:20}}
+                    onPress={()=>{
+                        navigation.goBack();
+                    }}>返回</Text>
                 )
             } 
         }

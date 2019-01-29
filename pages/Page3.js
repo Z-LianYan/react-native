@@ -15,14 +15,13 @@ export default class App extends Component<Props> {
   constructor(Props){
     super(Props);
     this.state = {
-      selectedTab:"home"
     }
   }
   render() {
     const {navigation} = this.props;
     const {state,setParams} = navigation;
     const {params} = state
-    const showText = params.dome === 'edit'? '正在编辑':'编辑完成'
+    const showText = params.mode === 'edit'? '正在编辑':'编辑完成'
     return (
       <View style={styles.container}>
         <Text>welcome to page3</Text>
@@ -33,7 +32,7 @@ export default class App extends Component<Props> {
             style={styles.input}
             onChangeText = {(text)=>{
                 setParams({
-                    title:text
+                  title:text
                 })
             }}
         />
