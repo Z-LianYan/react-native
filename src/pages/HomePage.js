@@ -27,7 +27,7 @@ export default class App extends Component<Props> {
         <Text>{this.props.children}</Text>
         <Button
           style={styles.btn} 
-          title='Go to Page1'
+          title='Go To Page1'
           onPress = {()=>{
             navigation.navigate("Page1")
           }}
@@ -35,19 +35,27 @@ export default class App extends Component<Props> {
         <Text/>
         <Button 
           style={styles.btn}
-          title='Go to Page2'
+          title='Go To Page2'
           onPress = {()=>{
             navigation.navigate('Page2',{name:'动态的Page2'})
           }}
         />
-        {/* <Text/>
+        <Text/>
         <Button 
           style={styles.btn}
-          title='Go to Page3'
+          title='Go To Page3'
           onPress = {()=>{
             navigation.navigate("Page3",{title:'Page3'})
           }}
-        /> */}
+        />
+        <Text/>
+        <Button 
+          style={styles.btn}
+          title='Go to AppTabNavigatior'
+          onPress = {()=>{
+            navigation.navigate("AppNav")
+          }}
+        />
       </View>
     );
   }

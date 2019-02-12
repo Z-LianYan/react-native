@@ -11,18 +11,18 @@ import {
     createAppContainer,
     createMaterialTopTabNavigator,
     createBottomTabNavigator
-} from 'react-navigation'
+} from 'react-navigation';
 
 import HomePage from "../src/pages/HomePage"
 import Page1 from "../src/pages/Page1"
 import Page2 from "../pages/Page2"
-// import Page3 from "../pages/Page3"
+import Page3 from "../pages/Page3"
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
 const AppTabNavigator = createBottomTabNavigator({
-    HomePage: {
-        screen: HomePage,
+    Page1: {
+        screen: Page1,
         navigationOptions: () => ({
             tabBarLabel: '首页',
             tabBarIcon:({tintColor,focused})=>(
@@ -35,15 +35,15 @@ const AppTabNavigator = createBottomTabNavigator({
         })
     },
 
-    Page1: {
-        screen: Page1,
+    HomePage: {
+        screen: HomePage,
         navigationOptions: () => ({
             tabBarLabel: '发现',
             tabBarIcon:({tintColor,focused})=>(
                 <Ionicons 
-                    name={focused?'md-medal' : 'md-medal'}
+                    name={ focused? 'md-medal' : 'md-medal' }
                     size={26}
-                    style={focused?{ color: tintColor }:{color:'#ccc'}}
+                    style={ focused? { color: tintColor }:{ color:'#ccc' } }
                 />
             ),
           
@@ -63,10 +63,10 @@ const AppTabNavigator = createBottomTabNavigator({
             ),
         })
     },
-
+    
 },
     {
-      initialRouteName: 'HomePage',
+      initialRouteName: 'Page1',
       tabBarPosition: 'bottom',
     //   lazy: true,
     //   swipeEnabled: true,
@@ -80,77 +80,93 @@ const AppTabNavigator = createBottomTabNavigator({
 )
 
 
-// const AppStackNavigator = createStackNavigator({
-//     HomePage: {
-//         screen: HomePage,
-//         navigationOptions: {
-//             headerTitle:"HomePage",
-//             headerStyle:{
-//                 backgroundColor:'#FFF8DC',
-//                 height:45
-//             },
-//             headerTitleStyle:{
-//                 flex:1,
-//                 textAlign: 'center',
-//             },
-//         },
-//     },
-//     Page1:{
-//         screen: Page1,
-//         navigationOptions:{
-//             header:null
-//         }
-//     },
-//     Page2:{
-//         screen: Page2,
-//         navigationOptions: ({navigation}) =>({
-//             headerTitle:navigation.state.params.name,
-//             headerStyle:{
-//                 backgroundColor:'#FFF8DC',
-//                 height:45
-//             },
-//             headerTitleStyle:{
-//                 flex:1,
-//                 textAlign: 'center',
-//             }
-//         })
-//     },
-//     Page3:{
-//         screen: Page3,
-//         navigationOptions:(props) => {
-//             const {navigation} = props;
-//             const {state,setParams} = navigation;
-//             const {params} = state;
-//             return {
-//                 headerTitle: params? params.title:'this is Page3',
-//                 headerStyle:{
-//                     backgroundColor:'#FFF8DC',
-//                     height:45
-//                 },
-//                 headerTitleStyle:{
-//                     flex:1,
-//                     textAlign:'center'
-//                 },
-//                 headerRight:(
-//                     <Text
-//                         style={{marginRight:20}}
-//                         onPress={()=>{
-//                             setParams({
-//                                 mode:params.mode === 'edit'? '':'edit'
-//                             })
-//                         }}
-//                     >{params.mode === 'edit' ? '保存':'编辑'}</Text>
-//                 ),
-//                 headerLeft:(
-//                     <Text 
-//                     style={{marginLeft:20}}
-//                     onPress={()=>{
-//                         navigation.goBack();
-//                     }}>返回</Text>
-//                 )
-//             } 
-//         }
-//     },
-// });
+const AppStackNavigator = createStackNavigator({
+    HomePage: {
+        screen: HomePage,
+        navigationOptions: {
+            headerTitle:"HomePage",
+            headerStyle:{
+                backgroundColor:'#FFF8DC',
+                height:45
+            },
+            headerTitleStyle:{
+                flex:1,
+                textAlign: 'center',
+            },
+        },
+    },
+    Page1:{
+        screen: Page1,
+        navigationOptions:{
+            header:null
+        }
+    },
+    Page2:{
+        screen: Page2,
+        navigationOptions: ({navigation}) =>({
+            headerTitle:navigation.state.params.name,
+            headerStyle:{
+                backgroundColor:'#FFF8DC',
+                height:45
+            },
+            headerTitleStyle:{
+                flex:1,
+                textAlign: 'center',
+            }
+        })
+    },
+    Page3:{
+        screen: Page3,
+        navigationOptions:(props) => {
+            const {navigation} = props;
+            const {state,setParams} = navigation;
+            const {params} = state;
+            return {
+                headerTitle: params? params.title:'this is Page3',
+                headerStyle:{
+                    backgroundColor:'#FFF8DC',
+                    height:45
+                },
+                headerTitleStyle:{
+                    flex:1,
+                    textAlign:'center'
+                },
+                headerRight:(
+                    <Text
+                        style={{marginRight:20}}
+                        onPress={()=>{
+                            setParams({
+                                mode:params.mode === 'edit'? '':'edit'
+                            })
+                        }}
+                    >{params.mode === 'edit' ? '保存':'编辑'}</Text>
+                ),
+                headerLeft:(
+                    <Text 
+                    style={{marginLeft:20}}
+                    onPress={()=>{
+                        navigation.goBack();
+                    }}>返回</Text>
+                )
+            } 
+        }
+    },
+    AppNav:{
+        screen:AppTabNavigator,
+        navigationOptions:()=>({
+            title:"this is AppTabNavigator",
+            headerStyle:{
+                height:45
+            },
+            headerTitleStyle:{
+                flex:1,
+                textAlign:'center'
+            },
+        })
+    }
+});
 
-export default App = createAppContainer(AppTabNavigator)
+export default App = createAppContainer(AppStackNavigator)
+
+
+// cd android && gradlew assembleRelease
