@@ -14,7 +14,6 @@ export default class App extends Component<Props> {
   constructor(Props){
     super(Props);
     this.state = {
-      selectedTab:"home"
     }
   }
   render() {
@@ -26,8 +25,22 @@ export default class App extends Component<Props> {
         <Button
           title='go back'
           style={styles.btn}
+          onPress =  {
+            ()=>{
+              navigation.goBack()
+            }
+          }
+        />
+        <Text/>
+        <Button
+          title='改变主题'
           onPress =  {()=>{
-            navigation.goBack()
+            navigation.setParams({
+              theme:{
+                tintColor:'orange',
+                updateTime:new Date().getTime()
+              }
+            })
             }
           }
         />
@@ -42,9 +55,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     justifyContent:'center',
     alignItems:'center'
-  },
-  btn:{
-    marginTop:50,
-    backgroundColor:'red',
   }
 });

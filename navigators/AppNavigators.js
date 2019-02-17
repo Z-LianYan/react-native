@@ -10,17 +10,38 @@ import {
     createStackNavigator,
     createAppContainer,
     createMaterialTopTabNavigator,
-    createBottomTabNavigator
+    createBottomTabNavigator,
+    TabBarBottom
 } from 'react-navigation';
 
-import HomePage from "../src/pages/HomePage"
-import Page1 from "../src/pages/Page1"
-import Page2 from "../pages/Page2"
-import Page3 from "../pages/Page3"
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import HomePage from "../src/pages/HomePage";
+import Page1 from "../src/pages/Page1"; 
+import Page2 from "../src/pages/Page2";
+import Page3 from "../src/pages/Page3";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
+class TabBarComponent extends Component<Props>{
+    constructor(props){
+        super(props);
+        this.theme = {
+            tintColor:props.activeTinitColor,
+            updateTime:new Date().getTime()
+        }
+    }
+    render(){
+        const { routes, index} = this.props.navigationState;
+        const {theme} = routes[index].params;
+        if(theme&&theme.updateTime>this.props.updateTime){
+            this.theme = theme;
+        }
+        return <TabBarBottom
+            {...this.props}
+            activeTintColor = {this.theme.tintcolor || this.props.activeTintColor}
+        />
+    }
+}
 
-const AppTabNavigator = createBottomTabNavigator({
+const AppTabNavigator = createMaterialTopTabNavigator({
     Page1: {
         screen: Page1,
         navigationOptions: () => ({
@@ -63,19 +84,19 @@ const AppTabNavigator = createBottomTabNavigator({
             ),
         })
     },
-    
 },
     {
       initialRouteName: 'Page1',
       tabBarPosition: 'bottom',
-    //   lazy: true,
-    //   swipeEnabled: true,
-    //   tabBarOptions: {
-    //     activeTintColor: 'red',
-    //     style: {
-    //       backgroundColor: '#fff',
-    //     },
-    //   }
+      lazy: true,
+      swipeEnabled: true,
+      tabBarOptions: {
+        activeTintColor: 'red',
+        style: {
+          backgroundColor: '#ccc'
+        },
+      },
+      TabBarComponent:TabBarComponent
     }
 )
 
@@ -94,26 +115,6 @@ const AppStackNavigator = createStackNavigator({
                 textAlign: 'center',
             },
         },
-    },
-    Page1:{
-        screen: Page1,
-        navigationOptions:{
-            header:null
-        }
-    },
-    Page2:{
-        screen: Page2,
-        navigationOptions: ({navigation}) =>({
-            headerTitle:navigation.state.params.name,
-            headerStyle:{
-                backgroundColor:'#FFF8DC',
-                height:45
-            },
-            headerTitleStyle:{
-                flex:1,
-                textAlign: 'center',
-            }
-        })
     },
     Page3:{
         screen: Page3,
@@ -171,20 +172,4 @@ export default App = createAppContainer(AppStackNavigator)
 
 // cd android && gradlew assembleRelease
 
-
-// git filter-branch --env-filter '
-// OLD_EMAIL="2930638161@qq.com"
-// CORRECT_NAME="Z-LianYan"
-// CORRECT_EMAIL="1371935318@qq.com"
-// if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
-// then
-//     export GIT_COMMITTER_NAME="$CORRECT_NAME"
-//     export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
-// fi
-// if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
-// then
-//     export GIT_AUTHOR_NAME="$CORRECT_NAME"
-//     export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
-// fi
-// ' --tag-name-filter cat -- --branches --tags
 

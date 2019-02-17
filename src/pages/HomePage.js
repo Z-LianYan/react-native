@@ -24,22 +24,6 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <Text>welcome to HomePage</Text>
         <Text/>
-        <Text>{this.props.children}</Text>
-        <Button
-          style={styles.btn} 
-          title='Go To Page1'
-          onPress = {()=>{
-            navigation.navigate("Page1")
-          }}
-        />
-        <Text/>
-        <Button 
-          style={styles.btn}
-          title='Go To Page2'
-          onPress = {()=>{
-            navigation.navigate('Page2',{name:'动态的Page2'})
-          }}
-        />
         <Text/>
         <Button 
           style={styles.btn}
