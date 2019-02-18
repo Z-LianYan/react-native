@@ -11,7 +11,8 @@ import {
     createAppContainer,
     createMaterialTopTabNavigator,
     createBottomTabNavigator,
-    TabBarBottom
+    TabBarBottom,
+    TabNavigator,
 } from 'react-navigation';
 
 import HomePage from "../src/pages/HomePage";
@@ -20,12 +21,12 @@ import Page2 from "../src/pages/Page2";
 import Page3 from "../src/pages/Page3";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-class TabBarComponent extends Component<Props>{
+class TabBarComponent extends Component<Props> {
     constructor(props){
         super(props);
         this.theme = {
-            tintColor:props.activeTinitColor,
-            updateTime:new Date().getTime()
+            tintColor: props.activeTinitColor,
+            updateTime: new Date().getTime()
         }
     }
     render(){
@@ -36,12 +37,12 @@ class TabBarComponent extends Component<Props>{
         }
         return <TabBarBottom
             {...this.props}
-            activeTintColor = {this.theme.tintcolor || this.props.activeTintColor}
+            activeTintColor = {this.theme.tintColor || this.props.activeTintColor}
         />
     }
 }
 
-const AppTabNavigator = createMaterialTopTabNavigator({
+const AppTabNavigator = createBottomTabNavigator({
     Page1: {
         screen: Page1,
         navigationOptions: () => ({
@@ -86,17 +87,18 @@ const AppTabNavigator = createMaterialTopTabNavigator({
     },
 },
     {
-      initialRouteName: 'Page1',
-      tabBarPosition: 'bottom',
-      lazy: true,
-      swipeEnabled: true,
-      tabBarOptions: {
-        activeTintColor: 'red',
-        style: {
-          backgroundColor: '#ccc'
-        },
-      },
-      TabBarComponent:TabBarComponent
+        // tabBarComponent:TabBarComponent,
+        // initialRouteName: 'Page1',
+        // tabBarPosition: 'bottom',
+        // lazy: true,
+        // swipeEnabled: true,
+        // tabBarOptions: {
+        //     // activeTintColor: 'red',
+        //     // style: {
+        //     //   backgroundColor: '#ccc'
+        //     // },
+        // },
+      
     }
 )
 
