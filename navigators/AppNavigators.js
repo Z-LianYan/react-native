@@ -5,42 +5,72 @@ import {
     Button,
     StyleSheet,
     Text,
+    ScrollView,
 } from "react-native"
 import {
     createStackNavigator,
     createAppContainer,
     createMaterialTopTabNavigator,
     createBottomTabNavigator,
-    TabBarBottom,
-    TabNavigator,
+    createDrawerNavigator,
+    SafeAreaView,
+    DrawerItems
 } from 'react-navigation';
 
 import HomePage from "../src/pages/HomePage";
 import Page1 from "../src/pages/Page1"; 
 import Page2 from "../src/pages/Page2";
 import Page3 from "../src/pages/Page3";
+import DrawerOne from "../src/pages/DrawerOne";
+import DrawerTwo from "../src/pages/DrawerTwo";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-class TabBarComponent extends Component<Props> {
-    constructor(props){
-        super(props);
-        this.theme = {
-            tintColor: props.activeTinitColor,
-            updateTime: new Date().getTime()
+
+
+const DrawerNavigator = createDrawerNavigator({
+    DrawerOne:{
+        screen:DrawerOne,
+        navigationOptions:{
+            drawerLabel:'drawerOne',
+            drawerIcon:({tintColor}) => (
+                <MaterialIcons
+                    name={'drafts'}
+                    size={24}
+                    style={{color:tintColor}}
+                />
+            )
+        }
+    },
+    DrawerTwo:{
+        screen:DrawerTwo,
+        navigationOptions:{
+            drawerLabel:'drawerTwo',
+            drawerIcon:({tintColor}) => (
+                <MaterialIcons
+                    name={'drafts'}
+                    size={24}
+                    style={{color:tintColor}}
+                />
+            )
         }
     }
-    render(){
-        const { routes, index} = this.props.navigationState;
-        const {theme} = routes[index].params;
-        if(theme&&theme.updateTime>this.props.updateTime){
-            this.theme = theme;
-        }
-        return <TabBarBottom
-            {...this.props}
-            activeTintColor = {this.theme.tintColor || this.props.activeTintColor}
-        />
-    }
-}
+},{
+    initialRouteName:'DrawerTwo',
+    contentOptions:{
+        activeTintColor:'purple'
+    },
+    contentComponent: (props) => (
+        <ScrollView style={{backgroundColor:'#987656',flex:1}}>
+            <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+                <DrawerItems {...props} />
+            </SafeAreaView>
+        </ScrollView>
+    )
+})
+
+
+
 
 const AppTabNavigator = createBottomTabNavigator({
     Page1: {
@@ -86,21 +116,19 @@ const AppTabNavigator = createBottomTabNavigator({
         })
     },
 },
-    {
-        // tabBarComponent:TabBarComponent,
-        // initialRouteName: 'Page1',
-        // tabBarPosition: 'bottom',
-        // lazy: true,
-        // swipeEnabled: true,
-        // tabBarOptions: {
-        //     // activeTintColor: 'red',
-        //     // style: {
-        //     //   backgroundColor: '#ccc'
-        //     // },
+{
+    initialRouteName: 'Page2',
+    tabBarPosition: 'bottom',
+    lazy: true,
+    swipeEnabled: true,
+    tabBarOptions: {
+        activeTintColor: 'red',
+        // style: {
+        //   backgroundColor: '#ccc'
         // },
-      
-    }
-)
+    },
+    
+})
 
 
 const AppStackNavigator = createStackNavigator({
@@ -158,6 +186,19 @@ const AppStackNavigator = createStackNavigator({
         screen:AppTabNavigator,
         navigationOptions:()=>({
             title:"this is AppTabNavigator",
+            headerStyle:{
+                height:45
+            },
+            headerTitleStyle:{
+                flex:1,
+                textAlign:'center'
+            },
+        })
+    },
+    DrawerNav:{
+        screen: DrawerNavigator,
+        navigationOptions:()=>({
+            title:"this is DrawerNavigator",
             headerStyle:{
                 height:45
             },

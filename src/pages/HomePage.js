@@ -40,6 +40,14 @@ export default class App extends Component<Props> {
             navigation.navigate("AppNav")
           }}
         />
+        <Text/>
+        <Button 
+          style={styles.btn}
+          title='Go to DrawerNavigator'
+          onPress = {()=>{
+            navigation.navigate("DrawerNav")
+          }}
+        />
       </View>
     );
   }

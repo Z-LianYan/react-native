@@ -31,19 +31,6 @@ export default class App extends Component<Props> {
             }
           }
         />
-        <Text/>
-        <Button
-          title='改变主题'
-          onPress =  {()=>{
-            navigation.setParams({
-              theme:{
-                tintColor:'orange',
-                updateTime:new Date().getTime()
-              }
-            })
-            }
-          }
-        />
       </View>
     );
   }
