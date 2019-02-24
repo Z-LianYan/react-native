@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 
-export default class App extends Component<Props> {
+export default class Page2 extends Component<Props> {
   constructor(Props){
     super(Props);
     this.state = {

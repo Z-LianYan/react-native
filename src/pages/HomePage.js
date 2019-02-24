@@ -12,7 +12,7 @@ import {
 import AppNavigators from '../../navigators/AppNavigators'
 
 
-export default class App extends Component<Props> {
+export default class HomePage extends Component<Props> {
   constructor(Props){
     super(Props);
     this.state = {
