@@ -13,6 +13,10 @@ import AppNavigators from '../../navigators/AppNavigators'
 
 
 export default class HomePage extends Component<Props> {
+  static navigationOptions = {
+    // tabBarVisible: false, // 隐藏底部导航栏
+    header:null,  //隐藏顶部导航栏
+  };
   constructor(Props){
     super(Props);
     this.state = {
@@ -35,7 +39,7 @@ export default class HomePage extends Component<Props> {
         <Text/>
         <Button 
           style={styles.btn}
-          title='Go to AppTabNavigatior'
+          title='TabNavigatior'
           onPress = {()=>{
             navigation.navigate("AppNav")
           }}
@@ -43,7 +47,7 @@ export default class HomePage extends Component<Props> {
         <Text/>
         <Button 
           style={styles.btn}
-          title='Go to DrawerNavigator'
+          title='DrawerNavigator'
           onPress = {()=>{
             navigation.navigate("DrawerNav")
           }}

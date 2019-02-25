@@ -11,8 +11,6 @@ import {
 } from 'react-navigation';
 
 import HomePage from "../src/pages/HomePage";
-import Page1 from "../src/pages/Page1"; 
-import Page2 from "../src/pages/Page2";
 import Page3 from "../src/pages/Page3";
 
 
@@ -28,6 +26,7 @@ const AppStackNavigator = createStackNavigator({
         screen: HomePage,
         navigationOptions: {
             headerTitle:"HomePage",
+            // header:null,隐藏顶部导航栏
             headerStyle:{
                 backgroundColor:'#FFF8DC',
                 height:45

@@ -5,28 +5,85 @@ import {
     Text, 
     View,
     Button,
-    FlatList
+    FlatList,
+    RefreshControl,
+    ActivityIndicator
 } from 'react-native';
 
-const TEAM_NAME = ['湖人','火箭','雷霆','雄鹿','勇士','凯尔特人','开拓者','老鹰','森林狼','尼克斯','热火','国王','76人','篮网','猛龙','骑士','太阳','奇才','黄蜂','步行者','公牛','魔术','马刺','活塞']
+const TEAM_NAME = ['湖人','火箭','雷霆','雄鹿','勇士','凯尔特人','开拓者','热火','76人','猛龙','骑士','步行者','公牛','马刺']
 export default class FlatListCom extends Component<Props> {
-    constructor(Props){
-        super(Props);
+    constructor(props){
+        super(props);
         this.state = {
+            isLoading:false,
+            dataArray:TEAM_NAME
         }
+    }
+    loadData(refreshing){
+        if(refreshing){
+            this.setState({
+                isLoading:true
+            });
+        }
+        
+        setTimeout(()=>{
+            let dataArray = [];
+            if(refreshing){
+                for (let i = this.state.dataArray.length - 1; i>=0; i--) {
+                    dataArray.push(this.state.dataArray[i]);
+                }
+            }else{
+                dataArray = this.state.dataArray.concat(TEAM_NAME)
+            }
+            
+            this.setState({
+                dataArray:dataArray,
+                isLoading:false,
+            });
+        },1000);
     }
      _renderFlatListItem(data){
         return <View style={styles.itemBox}>
             <Text style={styles.itemCon}>{data.item}</Text>
         </View>
     }
+    _activityIndicator(){
+        return <View style={styles.indicatorBox}>
+            <ActivityIndicator
+            style={styles.indicator}
+            size={'large'}
+            color = {'red'}
+            animating={true}
+            />
+            <Text>正在加载更多...</Text>
+        </View>
+    }
     render() {
         return (
         <View style={styles.container}>
             <FlatList
-                data={TEAM_NAME}
+                data={this.state.dataArray}
                 keyExtractor={(item, index) => item}
                 renderItem = {(item)=>this._renderFlatListItem(item)}
+                // refreshing = {this.state.isLoading}
+                // onRefresh = {()=>{
+                //     this.loadData();
+                // }}
+                refreshControl = {
+                    <RefreshControl
+                        title = {'Loading'}
+                        colors = {['red']}
+                        tintColor = {'purple'}
+                        refreshing = {this.state.isLoading}
+                        onRefresh = {()=>{
+                            this.loadData(true);
+                        }}
+                    />
+                }
+                ListFooterComponent = {()=>this._activityIndicator()}
+                onEndReached = {()=>this.loadData()}
+                // initialNumToRender = {10}
+                windowSize={100}//处理白屏 （屏幕外的区域渲染多少个屏幕单元，默认21个单元）
             />
         </View>
         );
@@ -41,14 +98,18 @@ const styles = StyleSheet.create({
   itemBox:{
     backgroundColor:"purple",
     height:200,
-    marginRight:15,
-    marginLeft:15,
-    marginBottom:15,
+    margin:15,
     alignItems:'center',
     justifyContent:'center'
   },
   itemCon:{
     color:'white',
     fontSize:30
+  },
+  indicatorBox:{
+    alignItems:'center'
+  },
+  indicator:{
+      marginBottom:5
   }
 });
