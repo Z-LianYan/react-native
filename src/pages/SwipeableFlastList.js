@@ -9,6 +9,8 @@ import {
     RefreshControl,
     ActivityIndicator,
     ImageBackground,
+    SwipeableFlatList,
+    TouchableHighlight
 } from 'react-native';
 
 const TEAM_NAME = ['湖人','火箭','雷霆','雄鹿','勇士','凯尔特人','开拓者','热火','76人','猛龙','骑士','步行者','公牛','马刺']
@@ -60,12 +62,25 @@ export default class FlatListCom extends Component<Props> {
             <Text>正在加载更多...</Text>
         </View>
     }
+    _quickActions(){
+        return <View style={styles.quickactionsBox}>
+            <TouchableHighlight
+            onPress={()=>{
+                alert('确定要删除吗？')
+            }}
+            >
+                <View style={styles.quickBox}>
+                    <Text style={styles.quickText}>删除</Text>
+                </View>
+            </TouchableHighlight>
+        </View>
+    }
     render() {
         return (
         <View style={styles.container}>
             <ImageBackground style={{ flex: 1 }}
             source={require('../../res/img/kebi.jpg')}>
-                <FlatList
+                <SwipeableFlatList
                     data={this.state.dataArray}
                     keyExtractor={(item, index) => item}
                     renderItem = {(item)=>this._renderFlatListItem(item)}
@@ -87,7 +102,10 @@ export default class FlatListCom extends Component<Props> {
                     ListFooterComponent = {()=>this._activityIndicator()}
                     onEndReached = {()=>this.loadData()}
                     // initialNumToRender = {10}
-                    windowSize={100}//处理白屏 （屏幕外的区域渲染多少个屏幕单元，默认21个单元）
+                    windowSize={300}//处理白屏 （屏幕外的区域渲染多少个屏幕单元，默认21个单元）
+                    renderQuickActions={()=>this._quickActions()}
+                    maxSwipeDistance={100}
+                    bounceFirstRowOnMount={false}//设置为false时刚进入页面第一个item不会自动向左划动
                 />
             </ImageBackground>
         </View>
@@ -96,25 +114,52 @@ export default class FlatListCom extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex:1,
-    backgroundColor: '#F5FCFF',
-  },
-  itemBox:{
-    backgroundColor:"purple",
-    height:200,
-    margin:15,
-    alignItems:'center',
-    justifyContent:'center'
-  },
-  itemCon:{
-    color:'white',
-    fontSize:30
-  },
-  indicatorBox:{
-    alignItems:'center'
-  },
-  indicator:{
-      marginBottom:5
-  }
+    container: {
+        flex:1,
+        backgroundColor: '#F5FCFF',
+    },
+    itemBox:{
+        backgroundColor:"purple",
+        height:100,
+        marginBottom:15,
+        marginRight:15,
+        marginLeft:15,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    itemCon:{
+        color:'white',
+        fontSize:30
+    },
+    indicatorBox:{
+        alignItems:'center'
+    },
+    indicator:{
+        marginBottom:5
+    },
+    quickactionsBox:{
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'flex-end',
+        marginRight:15,
+        marginBottom:15
+    },
+    // highLight:{
+    //     flex:1,
+    //     marginLeft:15
+    // },
+    quickBox:{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'flex-end',
+        backgroundColor:'red',
+        color:'#fff',
+        padding:10,
+        width:300,
+        color:'#fff',
+    },
+    quickText:{
+        color:'#fff',
+        fontSize:30,
+    }
 });

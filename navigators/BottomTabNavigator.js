@@ -8,14 +8,16 @@ import {
 // import HomePage from "../src/pages/HomePage";
 import Page1 from "../src/pages/Page1"; 
 import Page2 from "../src/pages/Page2";
+import SFList from "../src/pages/SwipeableFlastList";
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import FlatListCom from "../src/pages/FlatList";
 
 
 const AppTabNavigator = createBottomTabNavigator({
-    Page1: {
-        screen: Page1,
+    SFList: {
+        screen: SFList,
         navigationOptions: () => ({
             tabBarLabel: '首页',
             tabBarIcon:({tintColor,focused})=>(
