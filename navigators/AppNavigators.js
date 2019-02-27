@@ -76,7 +76,7 @@ const AppStackNavigator = createStackNavigator({
     AppNav:{
         screen:AppTabNavigator,
         navigationOptions:()=>({
-            title:"this is AppTabNavigator",
+            title:"AppTabNavigator",
             headerStyle:{
                 height:45
             },
@@ -89,7 +89,7 @@ const AppStackNavigator = createStackNavigator({
     DrawerNav:{
         screen: DrawerNavigator,
         navigationOptions:()=>({
-            title:"this is DrawerNavigator",
+            title:"DrawerNavigator",
             headerStyle:{
                 height:45
             },

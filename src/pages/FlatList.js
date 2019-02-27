@@ -18,7 +18,6 @@ export default class FlatListCom extends Component<Props> {
         this.state = {
             isLoading:false,
             dataArray:TEAM_NAME,
-            uri:'../../res/img/kebi.jpg'
         }
     }
     loadData(refreshing){

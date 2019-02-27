@@ -9,6 +9,7 @@ import {
 import Page1 from "../src/pages/Page1"; 
 import Page2 from "../src/pages/Page2";
 import SFList from "../src/pages/SwipeableFlastList";
+import sectonList from "../src/pages/SectionList";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -50,8 +51,8 @@ const AppTabNavigator = createBottomTabNavigator({
         })
     },
     
-    Page2: {
-        screen: Page2,
+    sectonList: {
+        screen: sectonList,
         navigationOptions: () => ({
             tabBarLabel: '我的',
             tabBarIcon:({tintColor,focused})=>(
@@ -65,7 +66,7 @@ const AppTabNavigator = createBottomTabNavigator({
     },
 },
 {
-    initialRouteName: 'Page2',
+    initialRouteName: 'sectonList',
     tabBarPosition: 'bottom',
     lazy: true,
     swipeEnabled: true,

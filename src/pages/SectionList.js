@@ -7,13 +7,33 @@ import {
     Button,
     FlatList,
     RefreshControl,
-    ActivityIndicator,
+    ActivityIndicator,//菊花（上拉刷新加载更多）
     ImageBackground,
-    SwipeableFlatList,
-    TouchableHighlight
+    SectionList,
 } from 'react-native';
 
-const TEAM_NAME = ['湖人','火箭','雷霆','雄鹿','勇士','凯尔特人','开拓者','热火','76人','猛龙','骑士','步行者','公牛','马刺']
+const TEAM_NAME = [{
+    title:'太平洋分区',
+    data:['勇士','快船','国王','湖人','太阳']
+
+},{
+    title:'西北分区',
+    data:['掘金','雷霆','开拓者','爵士','森林狼']
+},{
+    title:'西南分区',
+    data:['火箭','马刺','鹈鹕','独行侠','灰熊']
+},{
+    title:'中央分区',
+    data:['雄鹿','步行者','活塞','公牛','骑士']
+},{
+    title:'太平洋分区',
+    data:['猛龙','76人','凯尔特人','篮网','尼克斯']
+},{
+    title:'东南分区',
+    data:['黄蜂','魔术','热火','奇才','老鹰']
+}]
+// const TEAM_NAME = ['湖人','火箭','雷霆','雄鹿','勇士','凯尔特人','开拓者','热火','76人','猛龙','骑士','步行者','公牛','马刺']
+
 export default class FlatListCom extends Component<Props> {
     constructor(props){
         super(props);
@@ -61,17 +81,9 @@ export default class FlatListCom extends Component<Props> {
             <Text>正在加载更多...</Text>
         </View>
     }
-    _quickActions(){
-        return <View style={styles.quickactionsBox}>
-            <TouchableHighlight
-            onPress={()=>{
-                alert('确定要删除吗？')
-            }}
-            >
-                <View style={styles.quickBox}>
-                    <Text style={styles.quickText}>删除</Text>
-                </View>
-            </TouchableHighlight>
+    _renderSectionHeader({section}){
+        return <View style={styles.sectionContainer}>
+            <Text>{section.title}</Text>
         </View>
     }
     render() {
@@ -79,10 +91,10 @@ export default class FlatListCom extends Component<Props> {
         <View style={styles.container}>
             <ImageBackground style={{ flex: 1 }}
             source={require('../../res/img/kebi.jpg')}>
-                <SwipeableFlatList
-                    data={this.state.dataArray}
+                <SectionList
+                    sections={this.state.dataArray}
                     keyExtractor={(item, index) => item}
-                    renderItem = {(item)=>this._renderFlatListItem(item)}
+                    renderItem = {(data)=>this._renderFlatListItem(data)}
                     // refreshing = {this.state.isLoading}
                     // onRefresh = {()=>{
                     //     this.loadData();
@@ -90,9 +102,9 @@ export default class FlatListCom extends Component<Props> {
                     refreshControl = {
                         <RefreshControl
                             title = {'Loading'}
-                            colors = {['red']}
-                            tintColor = {'purple'}
-                            refreshing = {this.state.isLoading}
+                            colors = {['red']}//android platform
+                            tintColor = {'purple'}//ios platform
+                            refreshing = {this.state.isLoading} 
                             onRefresh = {()=>{
                                 this.loadData(true);
                             }}
@@ -102,9 +114,8 @@ export default class FlatListCom extends Component<Props> {
                     onEndReached = {()=>this.loadData()}
                     // initialNumToRender = {10}
                     windowSize={300}//处理白屏 （屏幕外的区域渲染多少个屏幕单元，默认21个单元）
-                    renderQuickActions={()=>this._quickActions()}
-                    maxSwipeDistance={100}
-                    bounceFirstRowOnMount={false}//设置为false时刚进入页面第一个item不会自动向左划动
+                    renderSectionHeader={(data)=>this._renderSectionHeader(data)}
+                    ItemSeparatorComponent={()=><View style={styles.saparator}/>}
                 />
             </ImageBackground>
         </View>
@@ -113,52 +124,36 @@ export default class FlatListCom extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        backgroundColor: '#F5FCFF',
-    },
-    itemBox:{
-        backgroundColor:"purple",
-        height:100,
-        marginBottom:15,
-        marginRight:15,
-        marginLeft:15,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    itemCon:{
-        color:'white',
-        fontSize:30
-    },
-    indicatorBox:{
-        alignItems:'center'
-    },
-    indicator:{
-        marginBottom:5
-    },
-    quickactionsBox:{
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'flex-end',
-        marginRight:15,
-        marginBottom:15
-    },
-    // highLight:{
-    //     flex:1,
-    //     marginLeft:15
-    // },
-    quickBox:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'flex-end',
-        backgroundColor:'red',
-        color:'#fff',
-        padding:10,
-        width:300,
-        color:'#fff',
-    },
-    quickText:{
-        color:'#fff',
-        fontSize:30,
-    }
+  container: {
+    flex:1,
+    backgroundColor: '#F5FCFF',
+  },
+  itemBox:{
+    backgroundColor:"#ccc",
+    height:50,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  itemCon:{
+    color:'white',
+    fontSize:30
+  },
+  indicatorBox:{
+    alignItems:'center'
+  },
+  indicator:{
+      marginBottom:5
+  },
+  sectionContainer:{
+      height:30,
+      backgroundColor:'#8080c0',
+      alignItems:'center',
+      justifyContent:'center'
+  },
+  saparator:{
+    height:0.3,
+    // border:'1px solid gray',
+    flex:1,
+    backgroundColor:'gray'
+  }
 });
