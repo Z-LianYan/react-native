@@ -113,7 +113,7 @@ export default class FlatListCom extends Component<Props> {
                     ListFooterComponent = {()=>this._activityIndicator()}
                     onEndReached = {()=>this.loadData()}
                     // initialNumToRender = {10}
-                    windowSize={300}//处理白屏 （屏幕外的区域渲染多少个屏幕单元，默认21个单元）
+                    windowSize={300}//处理白屏 （屏幕外的区域渲染多少个单元行，默认21个单元）
                     renderSectionHeader={(data)=>this._renderSectionHeader(data)}
                     ItemSeparatorComponent={()=><View style={styles.saparator}/>}
                 />
