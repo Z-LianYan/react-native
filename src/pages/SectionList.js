@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
       justifyContent:'center'
   },
   saparator:{
-    height:0.3,
+    height:1,
     // border:'1px solid gray',
     flex:1,
     backgroundColor:'gray'
