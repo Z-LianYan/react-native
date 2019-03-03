@@ -9,7 +9,8 @@ import {
 import Page1 from "../src/pages/Page1"; 
 import Page2 from "../src/pages/Page2";
 import SFList from "../src/pages/SwipeableFlastList";
-import sectonList from "../src/pages/SectionList";
+import SectonList from "../src/pages/SectionList";
+import Popular from "../src/pages/Popular";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -50,9 +51,22 @@ const AppTabNavigator = createBottomTabNavigator({
           
         })
     },
+    Popular:{
+        screen: Popular,
+        navigationOptions: () => ({
+            tabBarLabel: '我的',
+            tabBarIcon:({tintColor,focused})=>(
+                <Ionicons 
+                    name={focused?'md-person' : 'md-person'}
+                    size={26}
+                    style={focused?{ color: tintColor }:{color:'#ccc'}}
+                />
+            ),
+        })
+    },
     
     sectonList: {
-        screen: sectonList,
+        screen: SectonList,
         navigationOptions: () => ({
             tabBarLabel: '我的',
             tabBarIcon:({tintColor,focused})=>(
