@@ -5,7 +5,7 @@ export default class HttpUtils{
             fetch(url).then(response=>response.json()).then(result=>{
                 resolve(result)
             }).catch(error =>{
-                reject(error)
+                reject(JSON.stringify(error))
             })
         })
     }

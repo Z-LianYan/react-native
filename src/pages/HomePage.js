@@ -9,7 +9,7 @@ import {
     Button
 } from 'react-native';
 
-import AppNavigators from '../../navigators/AppNavigators'
+// import AppNavigators from '../../navigators/AppNavigators'
 
 
 export default class HomePage extends Component<Props> {

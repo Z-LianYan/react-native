@@ -22,6 +22,7 @@ const AppTabNavigator = createBottomTabNavigator({
         screen: SFList,
         navigationOptions: () => ({
             tabBarLabel: '首页',
+            headerTitle: '123456789',
             tabBarIcon:({tintColor,focused})=>(
                 <Ionicons 
                     name={focused?'md-home' : 'md-home'}
@@ -51,13 +52,15 @@ const AppTabNavigator = createBottomTabNavigator({
           
         })
     },
+
+    
     Popular:{
         screen: Popular,
         navigationOptions: () => ({
-            tabBarLabel: '我的',
+            tabBarLabel: '最热',
             tabBarIcon:({tintColor,focused})=>(
                 <Ionicons 
-                    name={focused?'md-person' : 'md-person'}
+                    name={focused?'md-heart' : 'md-heart'}
                     size={26}
                     style={focused?{ color: tintColor }:{color:'#ccc'}}
                 />
@@ -81,7 +84,6 @@ const AppTabNavigator = createBottomTabNavigator({
 },
 {
     initialRouteName: 'sectonList',
-    tabBarPosition: 'bottom',
     lazy: true,
     swipeEnabled: true,
     tabBarOptions: {
@@ -90,7 +92,6 @@ const AppTabNavigator = createBottomTabNavigator({
         //   backgroundColor: '#ccc'
         // },
     },
-    
 })
 
 export default AppTabNavigator;

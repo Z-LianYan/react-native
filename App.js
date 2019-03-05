@@ -1,6 +1,6 @@
 
-import AppStackNavigator from "./navigators/AppNavigators";
-export default AppStackNavigator;
+import StackNavigators from "./navigators/StackNavigators";
+export default StackNavigators;
 
 
 
