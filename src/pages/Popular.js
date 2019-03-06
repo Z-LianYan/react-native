@@ -9,7 +9,6 @@ import {
     Button
 } from 'react-native';
 import HttpUtils from '../utils/HttpUtils'
-import { red, black } from 'ansi-colors';
 const URL = "https://api.github.com/search/repositories?q="
 const QUERY_STR = '&sort=stars'
 export default class Popular extends Component<Props> {

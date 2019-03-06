@@ -11,6 +11,7 @@ import Page2 from "../src/pages/Page2";
 import SFList from "../src/pages/SwipeableFlastList";
 import SectonList from "../src/pages/SectionList";
 import Popular from "../src/pages/Popular";
+import _Scrollable from "../src/pages/Scrollable";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -61,6 +62,19 @@ const AppTabNavigator = createBottomTabNavigator({
             tabBarIcon:({tintColor,focused})=>(
                 <Ionicons 
                     name={focused?'md-heart' : 'md-heart'}
+                    size={26}
+                    style={focused?{ color: tintColor }:{color:'#ccc'}}
+                />
+            ),
+        })
+    },
+    _Scrollable:{
+        screen: _Scrollable,
+        navigationOptions: () => ({
+            tabBarLabel: '可滚动',
+            tabBarIcon:({tintColor,focused})=>(
+                <Ionicons 
+                    name={focused?'md-radio-button-on' : 'md-radio-button-on'}
                     size={26}
                     style={focused?{ color: tintColor }:{color:'#ccc'}}
                 />
