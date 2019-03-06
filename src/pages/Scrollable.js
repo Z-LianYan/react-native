@@ -52,17 +52,9 @@ class SAView extends Component<Props>{
             })
         })
     }
-    _renderFlatListItem(data){
-        return <View>
-            <Text>123</Text>
-        </View>
-    }
     render(){
         return <View>
-                <FlatList
-                    data={this.state.dataArray}
-                    keyExtractor={(item, index) => item}
-                    renderItem = {(item)=>this._renderFlatListItem(item)}/>
+               <Text>{this.state.result}</Text>
         </View>
     }
 }
