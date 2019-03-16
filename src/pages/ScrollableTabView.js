@@ -7,13 +7,15 @@ import {
     View,
     TextInput,
     Button,
-    FlatList
+    FlatList,
+    ListView
 } from 'react-native';
 import HttpUtils from '../utils/HttpUtils'
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view';
+import RowCell from "../compoments/ScrollableTabView/RowCell"
 const URL = "https://api.github.com/search/repositories?q=";
 const QUERY_STR = '&sort=stars';
-export default class Popular extends Component<Props> {
+export default class Popular extends Component<Props> { 
     
     render() {
         return (
@@ -30,11 +32,13 @@ export default class Popular extends Component<Props> {
     }
 }
 
-class SAView extends Component<Props>{
+class SAView extends Component{
     constructor(props){
         super(props);
+        // this.dataRespository = new DataRespository();
         this.state = {
-           result:''
+           result:"",
+           dataSource: new ListView.DataSource({rowHasChanged: (r1, r2)=>r1 !== r2}),
         }
     }
     componentWillMount(){
@@ -44,7 +48,8 @@ class SAView extends Component<Props>{
         let url=URL+this.props.tabLabel+QUERY_STR;
         HttpUtils.get(url).then((res)=>{
             this.setState({
-                result:JSON.stringify(res)
+                // dataSource:JSON.stringify(res)
+                dataSource:this.state.dataSource.cloneWithRows(res.items)
             })
         }).catch(error=>{
             this.setState({
@@ -52,9 +57,24 @@ class SAView extends Component<Props>{
             })
         })
     }
+    renderRow(data){
+        return <RowCell data={data}/>
+    }
     render(){
         return <View>
-               <Text>{this.state.result}</Text>
+               {/* <Text style={{height:600}}>{this.state.dataSource}</Text> */}
+               {/* <FlatList
+                    data={this.state.result}
+                    keyExtractor={(item, index) => item}
+                    renderItem = {(item)=>this._renderFlatListItem(item)}
+                    
+                    
+                    windowSize={100}//处理白屏 （屏幕外的区域渲染多少个屏幕单元，默认21个单元）
+                /> */}
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={(data)=>this.renderRow(data)}
+                />
         </View>
     }
 }

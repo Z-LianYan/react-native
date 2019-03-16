@@ -72,7 +72,7 @@ export default class FlatListCom extends Component<Props> {
                     // onRefresh = {()=>{
                     //     this.loadData();
                     // }}
-                    refreshControl = {
+                    refreshControl = {//下拉更新
                         <RefreshControl
                             title = {'Loading'}
                             colors = {['red']}
@@ -83,8 +83,8 @@ export default class FlatListCom extends Component<Props> {
                             }}
                         />
                     }
-                    ListFooterComponent = {()=>this._activityIndicator()}
-                    onEndReached = {()=>this.loadData()}
+                    ListFooterComponent = {()=>this._activityIndicator()}//上拉加载更多
+                    onEndReached = {()=>this.loadData()}//当列表被滚动到距离内容最底部不足onEndReachedThreshold的距离时调用。
                     // initialNumToRender = {10}
                     windowSize={100}//处理白屏 （屏幕外的区域渲染多少个屏幕单元，默认21个单元）
                 />

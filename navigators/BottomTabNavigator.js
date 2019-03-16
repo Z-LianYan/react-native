@@ -11,7 +11,7 @@ import Page2 from "../src/pages/Page2";
 import SFList from "../src/pages/SwipeableFlastList";
 import SectonList from "../src/pages/SectionList";
 import Popular from "../src/pages/Popular";
-import _Scrollable from "../src/pages/Scrollable";
+import Scrollable_tabView from "../src/pages/ScrollableTabView";
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -33,12 +33,6 @@ const AppTabNavigator = createBottomTabNavigator({
             ),
         })
     },
-    // FlatList:{
-    //     screen:FlatList,
-    //     navigationOptions:{
-    //         title:'FlatList'
-    //     }
-    // },
     FlatListCom: {
         screen: FlatListCom,
         navigationOptions: () => ({
@@ -68,8 +62,8 @@ const AppTabNavigator = createBottomTabNavigator({
             ),
         })
     },
-    _Scrollable:{
-        screen: _Scrollable,
+    Scrollable_tabView:{
+        screen: Scrollable_tabView,
         navigationOptions: () => ({
             tabBarLabel: '可滚动',
             tabBarIcon:({tintColor,focused})=>(
