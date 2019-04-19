@@ -15,8 +15,8 @@ import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-vi
 import RowCell from "../compoments/ScrollableTabView/RowCell"
 const URL = "https://api.github.com/search/repositories?q=";
 const QUERY_STR = '&sort=stars';
+
 export default class Popular extends Component<Props> { 
-    
     render() {
         return (
             <View style={styles.container}>
@@ -62,9 +62,8 @@ class SAView extends Component{
     }
     render(){
         return <View>
-               {/* <Text style={{height:600}}>{this.state.dataSource}</Text> */}
                {/* <FlatList
-                    data={this.state.result}
+                    data={this.state.dataSource}
                     keyExtractor={(item, index) => item}
                     renderItem = {(item)=>this._renderFlatListItem(item)}
                     

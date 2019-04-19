@@ -107,16 +107,38 @@ const StackNavigator = createStackNavigator({
     },
     DrawerNav:{
         screen: DrawerNavigator,
-        navigationOptions:()=>({
-            title:"DrawerNavigator",
-            headerStyle:{
-                height:45
-            },
-            headerTitleStyle:{
-                flex:1,
-                textAlign:'center'
-            },
-        })
+        navigationOptions:(props) => {
+            const {navigation} = props;
+            const {state,setParams} = navigation;
+            const {params} = state;
+            return {
+                headerTitle: 'drawer',
+                headerStyle:{
+                    backgroundColor:'#FFF8DC',
+                    height:45
+                },
+                headerTitleStyle:{
+                    flex:1,
+                    textAlign:'center'
+                },
+                headerRight:(
+                    <Text
+                        style={{marginRight:20}}
+                        onPress={()=>{
+                            // navigation.toggleDrawer()
+                            navigation.openDrawer()
+                        }}
+                    >菜单</Text>
+                ),
+                headerLeft:(
+                    <Text 
+                    style={{marginLeft:20}}
+                    onPress={()=>{
+                        navigation.goBack();
+                    }}>返回</Text>
+                )
+            } 
+        }
     }
 });
 

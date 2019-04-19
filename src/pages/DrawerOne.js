@@ -9,6 +9,10 @@ import {
 
 
 export default class drawerOne extends Component<Props> {
+    static navigationOptions = {
+        //tabBarLabel: '页面1',
+        drawerLabel:'页面1'
+    };
     constructor(props){
         super(props);
     }

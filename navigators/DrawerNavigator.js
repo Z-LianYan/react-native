@@ -2,6 +2,7 @@
 import React,{Component} from "react";
 import {
     ScrollView,
+    Text
 } from "react-native";
 
 import {
@@ -42,7 +43,8 @@ const DrawerNavigator = createDrawerNavigator({
                     size={24}
                     style={{color:tintColor}}
                 />
-            )
+            ),
+
         }
     }
 },{

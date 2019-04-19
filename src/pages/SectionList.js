@@ -32,9 +32,8 @@ const TEAM_NAME = [{
     title:'东南分区',
     data:['黄蜂','魔术','热火','奇才','老鹰']
 }]
-// const TEAM_NAME = ['湖人','火箭','雷霆','雄鹿','勇士','凯尔特人','开拓者','热火','76人','猛龙','骑士','步行者','公牛','马刺']
 
-export default class FlatListCom extends Component<Props> {
+export default class FlatListCom extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -58,7 +57,6 @@ export default class FlatListCom extends Component<Props> {
             }else{
                 dataArray = this.state.dataArray.concat(TEAM_NAME)
             }
-            
             this.setState({
                 dataArray:dataArray,
                 isLoading:false,

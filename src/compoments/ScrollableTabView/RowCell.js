@@ -36,7 +36,6 @@ export default class RowCell extends Component{
                         source={require("../../../res/img/ic_star.png")}
                     />
                 </View>
-                
             </View>
         </TouchableOpacity>
     }
@@ -52,7 +51,13 @@ const styles = StyleSheet.create({
         marginLeft:5,
         marginRight:5,
         borderWidth:0.5,
-        marginVertical:3
+        marginVertical:3,
+        borderRadius:5,
+        shadowColor: 'gray',
+        // shadowOffset: {width:0.5, height: 0.5},
+        shadowOpacity: 0.4,
+        shadowRadius: 1,
+        elevation:3
     },
     cellBottomBox:{
         flexDirection:'row',
