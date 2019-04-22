@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import { red } from 'ansi-colors';
 
-import {SegmentedBar} from 'teaset'
+import {SegmentedBar,TabView} from 'teaset'
 
-export default class drawerOne extends Component<Props> {
+export default class drawerOne extends Component {
     constructor(props){
         super(props);
     }
@@ -18,22 +18,25 @@ export default class drawerOne extends Component<Props> {
         const { navigation } = this.props 
         return (
             <View style={styles.drawerOneContainer}>
-                <SegmentedBar justifyItem='scrollable'>
-                    <SegmentedBar.Item title='Apple' />
+                <SegmentedBar 
+                justifyItem='fixed' 
+                indicatorPosition='bottom' 
+                indicatorType="boxWidth">
+                    <SegmentedBar.Item title='Apple'/>
                     <SegmentedBar.Item title='Banana' />
                     <SegmentedBar.Item title='Cherry' />
                     <SegmentedBar.Item title='Durian' />
                     <SegmentedBar.Item title='Filbert' />
-                    <SegmentedBar.Item title='Grape' />
-                    <SegmentedBar.Item title='Hickory' />
-                    <SegmentedBar.Item title='Lemon' />
-                    <SegmentedBar.Item title='Mango' />
                 </SegmentedBar>
+
+
+
             </View>
         )
     }
 
 }
+
 
 const styles = StyleSheet.create({
     drawerOneContainer:{
