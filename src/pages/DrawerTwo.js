@@ -4,15 +4,25 @@ import {
     StyleSheet,
     View,
     Text,
-    Button
+    Button,
+    Image
 } from 'react-native';
 import { red } from 'ansi-colors';
 
-import {SegmentedBar,TabView} from 'teaset'
+import {SegmentedBar,TabView,Projector,Carousel} from 'teaset'
 
 export default class drawerOne extends Component {
     constructor(props){
         super(props);
+        this.state={
+        }
+    }
+    renderSlide(rend){
+        return (
+            <View>
+                <Text style={{color:"red"}}>123</Text>
+            </View>
+        )
     }
     render(){
         const { navigation } = this.props 
@@ -28,6 +38,24 @@ export default class drawerOne extends Component {
                     <SegmentedBar.Item title='Durian' />
                     <SegmentedBar.Item title='Filbert' />
                 </SegmentedBar>
+
+
+
+                <Carousel
+                style={{height: 238}}
+                control={
+                    <Carousel.Control
+                    style={{alignItems: 'flex-end'}}
+                    dot={<Text style={{backgroundColor: 'rgba(0, 0, 0, 0)', color: '#5bc0de', padding: 4}}>□</Text>}
+                    activeDot={<Text style={{backgroundColor: 'rgba(0, 0, 0, 0)', color: '#5bc0de', padding: 4}}>■</Text>}
+                    />
+                }
+                >
+                    <Image style={{width: '100%', height: 238}} resizeMode='cover' source={require('../../res/img/kebi.jpg')} />
+                    <Image style={{width: '100%', height: 238}} resizeMode='cover' source={require('../../res/img/oneself.jpg')} />
+                    <Image style={{width: '100%', height: 238}} resizeMode='cover' source={require('../../res/img/zcjn.jpg')} />
+                </Carousel>
+
 
 
 
